@@ -1,0 +1,1245 @@
+CSS Quick Syntax Reference - Source Code
+
+*** Introduction ***
+
+HTML (MyPage.html)
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="stylesheet" href="MyStyle.css">
+  </head>
+  <body>
+    <p>This page is red</p>
+  </body>
+</html>
+
+CSS (MyStyle.css)
+p { color: red; }
+p { color: red; background: black }
+
+*** Chapter 1: Using CSS ***
+
+HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="stylesheet" type="text/css" href="MyStyle.css">
+    <style type="text/css">
+      @import url("MyStyle.css");
+      p { color: red; }
+    </style>
+  </head>
+  <body>
+    <p>This page is red</p>
+    <p style="color: green">Green text</p>
+  </body>
+</html>
+
+CSS
+body { background: red; }
+
+/* Multi-line
+Comment */
+
+/*
+* Meta data
+*/
+
+/*** Section heading ***/
+
+p { margin-top: -1px; } /* clarification */
+
+p { /* color: white; */ }
+
+.fruit {
+  color: red;
+  margin: 1px;
+}
+
+.fruit       { color: red;   margin: 1px; }
+.fruit.apple { color: green; margin: 2px; }
+
+*** Chapter 2: Grouping ***
+
+h1 { color: red; }
+h1 { background: black; }
+h2 { color: red; }
+h2 { background: black; }
+
+h1, h2 { color: red; }
+h1, h2 { background: black; }
+
+h1 {
+  color: red;
+  background: black;
+}
+h2 {
+  color: red;
+  background: black;
+}
+
+h1, h2 {
+  color: red;
+  background: black;
+}
+
+*** Chapter 3: Class and id selectors ***
+
+.myclass {}  /* Selects any element with class name myclass */
+p.myclass {} /* Selects any <p> element with class name myclass */
+
+.info { color: green; }
+<p class="info">Green</p>
+
+p.warn { color: orange; }
+<p class="warn">Orange</p>
+
+<p class="style1 style2"></p>
+
+#myid {}  /* Selects the element with id set to myid */
+p#myid {} /* Selects the <p> element with id set to myid */
+
+#err { color: red; }
+<p id="err">Red</p>
+
+*** Chapter 4: Attribute selectors ***
+
+/* Attribute selector */
+input[type] {}
+<input type="text">
+
+/* Attribute value selector */
+input[type="submit"]
+<input type="submit">
+
+/* Language attribute selector */
+p[lang|="en"] {}
+<p lang="en">English</p>
+<p lang="en-US">American English</p>
+
+/* Delimited value selector */
+input[value~="word"] {}
+<input type="text" value="word">
+<input type="text" value="word word2">
+
+/* Value substring selector */
+p[title*="para"] {}
+<p title="my paragraph"></p>
+
+/* Value start selector */
+p[title^="first"] {}
+<p title="first paragraph"></p>
+
+/* Value end selector */
+p[title$="1"] {}
+<p title="paragraph 1"></p>
+
+*** Chapter 5: Pseudo selectors ***
+
+/* first-letter and first-line */
+p:first-letter { font-size: 120%; }
+p:first-line { font-weight: bold; }
+
+/* before and after */
+p:before { content: "Before"; }
+p:after { content: "After"; }
+<p>Middle</p> <!-- "BeforeMiddleAfter" -->
+p.bullet:before { content: url(my-bullet.png); }
+
+/* link and visited */
+a:link {} /* unvisited links */
+a:visited {} /* visited links */
+
+/* active and hover */
+a:active {} /* activated links */
+a:hover {} /* hovered links */
+
+/* focus */
+input:focus {}
+
+/* first-child */
+p:first-child {} /* first paragraph child */
+
+<p>
+  <span>First child</span>
+  <span>Text</span>
+</p>
+
+/* last-child */
+p:last-child {} /* last paragraph child */
+
+<p>
+  <em>Text</em>
+  <em>Last child</em>
+</p>
+
+/* only-child */
+p:only-child {} /* children without siblings */
+
+<p>
+  <strong>Only child</strong>
+</p>
+<p>
+  <strong>Text</strong>
+  <em>Text</em>
+</p>
+
+/* only-of-type */
+p:only-of-type {} /* only <p> element */
+
+<div>
+  <h1>Text</h1>
+  <p>Only of type</p>
+</div>
+
+/* first-of-type */
+p:first-of-type {} /* first <p> element */
+
+<div>
+  <h1>Text</h1>
+  <p>First of type</p>
+  <p>Text</p>
+</div>
+
+/* last-of-type */
+strong:last-of-type {} /* last <strong> element */
+
+<div>
+  <strong>Text</strong>
+  <strong>Last of type</strong>
+</div>
+
+/* nth-child */
+p:nth-child(1) {} /* first child */
+p:nth-child(2n) {} /* even children */
+p:nth-child(2n+1) {} /* odd children */
+ 
+<p>
+  <span>First and odd</span>
+  <span>Even</span>
+  <span>Odd</span>
+</p>
+
+tr:nth-child(even) {} /* even table rows */
+tr:nth-child(odd)  {} /* odd table rows */
+p:nth-child(-n+3)  {} /* first three children */
+
+/* nth-of-type */
+p:nth-of-type(2)    {} /* second paragraph sibling */
+p:nth-of-type(2n)   {} /* even paragraph siblings */
+p:nth-of-type(2n+1) {} /* odd paragraph siblings */
+
+<div>
+  <em>Text</em>
+  <p>Odd</p>
+  <p>Second and even</p>
+  <p>Odd</p>
+</div>
+
+p:nth-of-type(even) {} /* even paragraph siblings */
+p:nth-of-type(odd)  {} /* odd paragraph siblings */
+
+/* nth-last-of-type */
+p:nth-last-of-type(3)    {} /* third last paragraph */
+p:nth-last-of-type(-n+2) {} /* last two paragraphs */
+
+<div>
+  <p>Third last</p>
+  <p>Last two</p>
+  <p>Last two</p>
+  <em>Text</em>
+</div>
+
+/* nth-last-child */
+p:nth-last-child(3) {} /* third last child */
+p:nth-last-child(-n+2) {} /* last two children */
+
+<div>
+  <p>Third last</p>
+  <p>Last two</p>
+  <p>Last two</p>
+</div>
+
+/* empty */
+p:empty {} /* empty paragraphs */
+
+<p></p>
+<p><!-- also empty --></p>
+
+/* root */
+:root {} /* root element */
+
+/* enabled and disabled */
+input:enabled  { background: green; }
+input:disabled { background: red; }
+
+<form>
+  <input type="text" name="enabled">
+  <input type="text" name="disabled" disabled>
+</form>
+
+/* checked */
+input[type="checkbox"]:checked {}
+
+<form>
+  <input type="checkbox">
+</form>
+
+/* valid and invalid */
+input:valid   { background: green; }
+input:invalid { background: red; }
+
+<form>
+  <input type="email" required>
+  <input type="email">
+</form>
+
+/* required and optional */
+input:required { color: red; }
+input:optional { color: gray; }
+
+<form>
+  <input type="email" required>
+  <input type="url">
+</form>
+
+/* target */
+:target { font-weight: bold; } /* targeted element */
+<a href="#my-target" id="my-target">In page link</a>
+
+/* lang */
+p:lang(en) {}
+
+<p lang="en">English</p>
+<body lang="fr">
+  <p>French</p>
+</body>
+
+/* not */
+p:not(.first) { font-weight: bold; }
+
+<p class="first">Not bold</p>
+<p>Bold</p>
+
+*** Chapter 6: Relationship selectors ***
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+  </head>
+  <body>
+    <h1>Heading</h1>
+    <p>Paragraph</p>
+  </body>
+</html>
+
+p { border: inherit; } /* inherit parent's border */
+body { color: gray; }  /* set document text color to gray */
+
+/* Adjacent selector */
+div+p { color: red; }
+
+<div>Not red</div>
+<p>Red</p>
+<p>Not red</p>
+
+/* Descendent selector */
+div p { background: gray; }
+
+<div>
+  <p>Gray</p>
+</div>
+
+/* Direct child selector */
+div > span { color: green; }
+
+<div>
+  <p>
+    <span>Not green</span>
+  </p>
+  <span>Green</span>
+</div>
+
+/* General sibling selector */
+h1~p { color: blue; }
+
+<p>Not blue</p>
+<h1>Not blue</h1>
+<p>Blue</p>
+<p>Blue</p>
+
+*** Chapter 7: Specificity ***
+
+/* Selector specificity */
+* { color: red; }                   /*  0 */
+p { color: blue; }                  /*  1 */
+body p { color: gold; }             /*  2 */
+.a { color: lime; }                 /* 10 */
+p:first-child { color: navy; }      /* 11 */
+p[class=a] { color: teal; }         /* 11 */
+p:first-letter { color: white; }    /*  1 */
+#i { color: aqua; }                /* 100 */
+<p style="color: black;">Text</p> /* 1000 */
+p { color: red !important; }     /* 10000 */
+
+/* Designer styles */
+p { color: orange; } /* overridden */
+p { color: silver; } /* dominant */
+
+p { color: orange; } /* dominant */
+body { color: silver; }
+
+*** Chapter 8: Colors ***
+
+/* Named notation */
+p { color: red; } /* color paragraphs red */
+
+/* Hexadecimal notation */
+p { color: #FF0000; } /* red:255, green:0, blue:0 */
+
+/* Short hexadecimal notation */
+p { color: #f00; } /* same as #ff0000 */
+
+/* RGB notation */
+p { color: rgb(255, 0, 0); }
+p { color: rgb(100%, 0%, 0%); }
+
+/* RGBA notation */
+p { color: rgba(100%, 0%, 0%, 0.5); } /* red with 50% transparency */
+
+p {
+  color: rgb(100%, 0%, 0%); /* fallback */
+  color: rgba(100%, 0%, 0%, 0.5);
+}
+
+/* HSL notation */
+p { color: hsl(0, 100%, 100%); }
+
+/* HSLA notation */
+p { color: hsla(0, 100%, 100%, 0.5); } /* red with 50% transparency */
+
+*** Chapter 9: Units ***
+
+/* Absolute units */
+.one-cm { font-size: 1cm; }
+.one-mm { font-size: 1mm; }
+.one-in { font-size: 1in; }
+
+/* Typographical units */
+.one-point { font-size: 1pt; }
+.one-pica  { font-size: 1pc; }
+
+/* Relative units */
+.one-pixel   { font-size: 1px; }
+.one-percent { font-size: 1%; }
+
+/* Font-relative units */
+.one-ex  { font-size: 1ex; }
+.one-em  { font-size: 1em; }
+.one-rem { font-size: 1rem; }
+
+/* Same width */
+<div style="width: 5ch;"></div>
+<div>00000</div>
+
+/* Viewport units */
+width: 50vw;   /* 50% of viewport width */
+height: 25vh;  /* 25% of viewport height */
+width: 1vmin;  /* 1vh or 1vw, whichever is smallest */
+height: 1vmax; /* 1vh or 1vw, whichever is largest */
+
+/* Unit values */
+p { font-size: 0.394in; } /* decimal value */
+p { margin: -1px; }       /* negative value */
+
+p { font-size: 1ex; }  /* correct */
+p { font-size: 0; }    /* correct */
+p { font-size: 0ex; }  /* correct */
+p { font-size: 1 ex; } /* invalid */
+p { font-size: 1; }    /* invalid */
+
+*** Chapter 10: CSS Properties ***
+
+.round {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+*** Chapter 11: Text ***
+
+/* color */
+color : inherit | <color>
+p { color: #00f; }
+
+/* text-transform */
+text-transform : inherit | none | uppercase | lowercase | capitalize
+text-transform: none; /* remove effect */
+
+/* text-decoration */
+text-decoration : none | underline + overline + line-through + blink
+.highlight { text-decoration: underline overline; }
+
+/* text-indent */
+text-indent (block) : inherit | <length> | <percentage>
+p { text-indent: 1em; }
+
+/* text-align */
+text-align (block) : inherit | left | center | right | justify
+p { text-align: justify; }
+
+/* direction */
+direction (block) : inherit | ltr | rtl
+<p style="direction: rtl">Aligned from right-to-left</p>
+
+/* text-shadow */
+text-shadow : inherit | none | <offset-x>
+h1 { text-shadow: 1px -1px 1px gray; }
+
+/* box-shadow */
+box-shadow (block) : inherit | none | [inset] <offset-x> <offset-y> [<blur-radius>] [<spread-radius>] [<color>]
+.drop-shadow { box-shadow: 3px 3px 3px 6px #ccc; }
+.inset-shadow { box-shadow: inset 3px 3px 3px 6px #ccc; }
+
+.drop-shadow
+{
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+*** Chapter 12: Spacing ***
+
+/* line-height */
+line-height : inherit | normal | <length> | <percentage> | <number>
+line-height: 1.5; /* Line height is 1.5 times font size */
+
+/* word-spacing and letter-spacing */
+word-spacing : inherit | normal | <length>
+letter-spacing : inherit | normal | <length>
+
+p {
+  letter-spacing: 3px;
+  word-spacing: 5px;
+}
+
+/* white-space */
+white-space (block) : inherit | normal | nowrap | pre | pre-wrap | pre-line
+p { white-space: normal; } /* wrap text and collapse newlines, spaces and tabs */
+
+*** Chapter 13: Font ***
+
+/* font-family */
+font-family : inherit | <family-names> | <generic-families>
+font-family: "Times New Roman", times, serif;
+
+/* font-size */
+font-size : inherit | <length> | <percentage> | smaller | larger | xx-small | x-small  | small |  medium | large | x-large | xx-large
+
+/* font-style */
+font-style : inherit | normal | italic | oblique
+
+/* font-variant */
+font-variant : inherit | normal | small-caps
+
+/* font-weight */
+font-weight : inherit | normal | bold  | bolder | lighter | 100 | 200 | ... | 900
+
+/* font */
+font  : inherit | <font-style> + <font-variant> + <font-weight> + <font-size> / <line-height> + <font-family>
+p { font: italic 50%/125% Verdana; }
+
+/* Custom fonts */
+@font-face
+{
+  font-family: MyFont;
+  src: url(myfont.ttf);
+}
+
+p { font-family: "MyFont", arial, sans-serif; }
+
+*** Chapter 14: Background ***
+
+/* background-color
+background-color : transparent | <color>
+background-color: #ccc;
+
+/* background-image
+background-image : none | url(<url>)
+
+/* Relative path */
+background-image: url(../images/myimg.jpg);
+
+/* Absolute path */
+background-image: url(http://mydomain.com/images/myimg.jpg);
+
+/* background-repeat */
+background-repeat : repeat | repeat-x | repeat-y | no-repeat
+
+/* background-attachment */
+background-attachment : scroll | fixed | local
+
+/* background-position */
+background-position : <length> <length> | <percentage> <percentage> | top/center/bottom + left/center/right
+background-position: 5px 10px;
+
+/* background-size */
+background-size (1-2) : auto | <length> | <percentage> | cover | contain
+background-size: 150% 100%;
+background-size: 150%;
+
+/* background-clip */
+background-clip : border-box | padding-box | content-box
+background-clip: content-box;
+
+/* background-origin */
+background-origin : padding-box | border-box | content-box
+background-origin: content-box;
+background-clip: content-box;
+
+.border-origin {
+  -webkit-background-origin: border-box;
+  -moz-background-origin: border;
+  background-origin: border-box;
+}
+
+/* background */
+background : <background-color> + <background-image> + <background-repeat> + <background-attachment> + <background-position> + <background-size> + <background-clip> + <background-origin>
+
+background: url(bg.png) no-repeat fixed right bottom;
+background-image: url(bg.png);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: right bottom;
+
+/* Multiple backgrounds */
+background-image: url(bg1.png), url(bg2.png);
+background-repeat: no-repeat, repeat-y;
+background-attachment: fixed, fixed;
+background-position: right bottom, top left;
+
+background: url(bg1.png) no-repeat fixed right bottom, 
+            url(bg2.png) repeat-y fixed top left;
+
+background-image: bg.png; /* fallback */
+background-image: bg1.png, bg2.png;
+
+*** Chapter 15: Gradients ***
+
+/* Linear gradients */
+linear-gradient([<angle> | to <side-or-corner>] {, <color stop> [stop position]} (2-?) )
+
+.mygradient {
+  background-image: linear-gradient(gray, black);
+}
+
+linear-gradient(to bottom right, gray, black); /* bottom-right linear gradient */
+
+linear-gradient(0deg,   gray, black); /* to top */ 
+linear-gradient(90deg,  gray, black); /* to right */ 
+linear-gradient(180deg, gray, black); /* to bottom */ 
+linear-gradient(-90deg, gray, black); /* to left */
+
+linear-gradient(gray, white 25%, black); /* gradient with multiple color stops */
+
+.linear-gradient {
+  background-color: red; /* fallback color */
+  background: -webkit-gradient(linear, left top, right top, from(red), to(orange));
+  background: -webkit-linear-gradient(left, red, orange);
+  background: -moz-linear-gradient(left, red, orange);
+  background: -o-linear-gradient(left, red, orange);
+  background: linear-gradient(to right, red, orange);
+}
+
+/* Radial gradients */
+radial-gradient([<shape> + <size>] [at <position>] {, <color stop> [stop position]} {2-?} )
+radial-gradient(gray, black);
+
+radial-gradient(black 25%, white, black 75%);
+radial-gradient(circle, black 25%, white, black 75%);
+radial-gradient(75% 25%, gray, black);
+radial-gradient(farthest-side, gray, black);
+radial-gradient(at right bottom, gray, black);
+
+.radial-gradient {
+  background-color: red; /* fallback color */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,red), color-stop(100%,orange));
+  background: -webkit-radial-gradient(center, ellipse cover, red 0%, orange 100%);
+  background: -moz-radial-gradient(center, ellipse cover, red 0%, orange 100%);
+  background: -o-radial-gradient(center, ellipse cover, red 0%, orange 100%);
+  background: radial-gradient(ellipse at center, red 0%, orange 100%);
+}
+
+/* Repeating gradients */
+repeating-linear-gradient([<angle> | to <side-or-corner>] {, <color stop> [stop position]} {2-?}) )
+
+repeating-linear-gradient(-45deg, white 0, black 10%, white 20%);
+repeating-radial-gradient(black, black 5%, white 5%, white 10%);
+
+*** Chapter 16: Box model ***
+
+<span>Inline</span>
+<div>Block</div>
+
+<span style="color: red;">Red text</span>
+
+<div class="a">
+  <div class="b">Block within a block</div>
+</div>
+
+*** Chapter 17: Border ***
+
+/* border-style */
+border-style (1-4) | border-top-style | border-right-style | border-bottom-style | border-left-style : none | dashed | dotted | double | groove | hidden | inset | outset | ridge | solid 
+
+border-style: solid none solid none;
+border-style: solid none solid;
+border-style: solid none;
+
+border-style: solid;
+
+border-top-style:    dotted;
+border-right-style:  dashed;
+border-bottom-style: ridge;
+border-left-style:   inset;
+
+/* border-width */
+border-width (1-4) | border-top-width | border-right-width | border-bottom-width | border-left-width : <length> | thin | medium | thick
+
+/* Shortcut property */
+border-width: thin medium;
+
+/* Full-length properties */
+border-top-width:    thin;
+border-right-width:  medium;
+border-bottom-width: thin;
+border-left-width:   medium;
+
+/* border-color */
+border-color (1-4) | border-top-color | border-right-color | border-bottom-color | border-left-color : <color> | transparent
+border-color: transparent;
+
+/* border */
+border | border-top | border-right | border-bottom | border-left : <border-width> + <border-style> + <border-color>
+
+border: 1px solid black;
+
+border-top:    1px solid red;
+border-right:  1px solid blue;
+border-bottom: 1px solid aqua;
+border-left:   1px solid lime;
+
+/* border-radius */
+border-radius (1-4) | border-top-left-radius | border-top-right-radius | border-bottom-right-radius | border-bottom-left-radius : <length> | <percentage> [ / <length> | <percentage> ]
+
+.a { border-radius: 5px; }
+.b { border-radius: 5px 20px; }
+.c { border-radius: 50%; }
+.d { border-radius: 30px/10px; }
+
+border-top-left-radius:     5px;
+border-top-right-radius:   20px;
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 20px;
+
+.round {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+*** Chapter 18: Outline ***
+
+/* outline-style */
+outline-style : none | solid | dotted | dashed | double | groove | ridge | inset | outset 
+
+/* outline-width */
+outline-width : <length> | thin | medium | thick
+
+/* outline-color */
+outline-color : invert | <color>
+
+/* outline */
+outline : <outline-width> + <outline-style> + <outline-color>
+
+outline-width: thin;
+outline-style: solid;
+outline-color: red;
+
+/* outline-offset */
+outline-offset : <length>
+outline-offset: 3px;
+
+*** Chapter 19: Margin and padding ***
+
+/* Padding */
+padding (1-4) | padding-top | padding-right | padding-bottom | padding-left : <length> | <percentage>
+
+padding-top:    10px;
+padding-right:   0;
+padding-bottom: 10px;
+padding-left:    0;
+
+padding: 10px 0 10px 0;
+padding: 10px 0;
+
+/* Margin */
+margin (1-4) | margin-top | margin-right | margin-bottom | margin-left: <length> | <percentage> | auto
+
+margin: 1cm 0;
+
+margin-top:    1cm;
+margin-right:  0;
+margin-bottom: 1cm;
+margin-left:   0;
+
+<div style="margin-bottom: 5px;">Top box</div>
+<div style="margin-top: 10px;">Bottom box</div>
+
+*** Chapter 20: Dimension ***
+
+/* width and height */
+width | height : auto | <length> | <percentage>
+
+.mybox {
+  width: 100px;
+  height: 50px;
+}
+
+/* min-width and min-height */
+min-width | min-height : <length> | <percentage>
+
+.half {
+  min-width: 50%;
+  min-height: 50%;
+}
+
+/* max-width and max-height */
+max-width | max-height : none | <length> | <percentage>
+
+.mybox {
+  max-width: 500px;
+  min-width: 200px;
+}
+
+.mybox {
+  max-height: 20em;
+  min-height: 5em;
+}
+
+/* box-sizing */
+box-sizing : content-box | border-box
+
+/* 100 pixels wide element */
+.mybox {
+  padding: 3px;
+  border:  2px solid red;
+  width:  90px;
+}
+
+/* 100 pixels wide element */
+.mybox {
+  box-sizing: border-box;
+  padding: 3px;
+  border:  2px solid red;
+  width: 100px;
+}
+
+/* Use border-box for all elements */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*** Chapter 21: Positioning ***
+
+/* position */
+position : static | relative | absolute | fixed
+top | right | bottom | left (positioned) : auto | <length> | <percentage>
+
+/* static */
+.static { position: static; } /* not positioned element */
+
+/* relative */
+.relative {
+  position: relative;
+  top: 20px;
+}
+
+margin-bottom: -20px; /* move element 20 pixels down */
+
+/* absolute */
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* fixed */
+.fixed {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* overflow */
+overflow (block) : visible | hidden | scroll | auto
+
+overflow:   hidden; /* hide all overflow */
+overflow-x: hidden; /* hide horizontal overflow */
+overflow-y: hidden; /* hide vertical overflow */
+
+/* clip */
+clip (absolute | fixed) : auto | rect(<top>, <right>, <bottom>, <left>)
+
+.myclip {
+  position: absolute;
+  clip: rect(100px, 500px, 300px, 100px);
+}
+
+clip: rect(100px, auto, auto, 100px); /* remove 100px from left and top */
+clip: auto; /* no clipping */
+clip: rect(100px 500px 300px 100px); /* backwards compatible IE4-7 syntax */
+
+/* z-index */
+z-index (positioned) : auto | <integer>
+
+<img src="ace-of-hearts.png" style="position: absolute; left: 0; top: 0; z-index: 1;">
+<img src="ace-of-spades.png" style="position: absolute; left: 100px; top: 100px; z-index: 0;">
+
+/* vertical-align */
+vertical-align (inline | table-cell) : baseline | <length> | <percentage> | top | middle | bottom | text-top | text-bottom | super | sub
+
+Normal <span style="vertical-align: -5px;">Lowered</span> /* align text segment 5 pixels below normal text */
+
+<table>
+  <tr>
+    <td style="vertical-align: bottom;">Bottom</td>
+  </tr>
+</table>
+
+/* Centering */
+.text-center { text-align: center; }
+<p class="text-center">Centered text</p>
+
+.box-center { margin: 0 auto; }
+<div style="width: 50px; height: 50px; border: 1px solid black;" class="box-center"></div>
+
+<div style="vertical-align: middle; display: table-cell; min-height: 100px;">Centered</div>
+
+*** Chapter 22: Classification ***
+
+/* display */
+display : none | inline | block | list-item | inline-block | inline-table | table | table-cell | table-row | table-column | table-column-group | table-footer-group | table-header-group | table-row-group | flex | inline-flex | grid | inline-grid | run-in
+
+<a href="#" style="display: block;">Block link</a>
+
+li {
+  display: inline-block;
+  width: 100px;
+  background: #ccc;
+}
+
+<ul>
+  <li>Item one</li>
+  <li>Item two</li>
+  <li>Item three</li>
+</ul>
+
+.removed { display: none; }
+
+/* visibility */
+visibility (block) : inherit | visible | hidden | collapse
+
+/* opacity */
+opacity : <number>
+
+.half-transparent { opacity: 0.5 }
+
+.half-transparent {
+  filter: alpha(opacity=50); /* IE5-8 */
+  opacity: 0.5;
+}
+
+/* float */
+float : none | left | right
+
+<img style="float: left;" src="myimage.png" alt="">
+
+.box {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 1em;
+  background: #ccc;
+  border-radius: 10px;
+}
+
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+
+/* clear */
+clear (block) : none | left | right | both
+
+.clear { clear: both; }
+<div class="clear"></div>
+
+.box {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 0 1em;
+  background: #ccc;
+  border-radius: 10px;
+}
+
+/* cursor */
+cursor: url(new.cur), pointer;
+
+*** Chapter 23: List ***
+
+/* list-style-type */
+list-style-type : inherit | disc | circle | square | none
+list-style-type : inherit | decimal | none | upper-alpha | lower-alpha | upper-roman | lower-roman | lower-greek | lower-latin | armenian | georgian |
+decimal-leading-zero
+
+ul { list-style-type: square; }
+ol { list-style-type: upper-roman; } /* I, II, III, ... */
+
+/* list-style-image */
+list-style-image : inherit | none | url(<url>)
+
+list-style-image: url(my-bullet.png)
+
+/* list-style-position */
+list-style-position : inherit | outside | inside
+
+/* list-style */
+list-style : <list-style-type> + <list-style-image> + <list-style-position>
+
+<ul style="list-style: inside square;">
+  <li>Apple</li>
+  <li>Orange</li>
+  <li>Pear</li>
+</ul>
+
+/* Counters */
+body { counter-reset: chapter; } /* Create a counter named chapter */
+h1:before {                      /* Increment the counter at each <h1> and display the counter */
+  content: "Chapter " counter(chapter) " - ";
+  counter-increment: chapter;
+}
+
+<h1>First</h1>  <!-- Chapter 1 - First -->
+<h1>Second</h1> <!-- Chapter 2 - Second -->
+<h1>Third</h1>  <!-- Chapter 3 - Third -->
+
+h2:before {
+  content: counter(chapter) "." counter(section) " ";
+  counter-increment: section;
+}
+h1 { counter-reset: section; }
+
+<h1>Head</h1> <!-- Chapter 1 - Head -->
+<h2>Sub</h2>   <!-- 1.1 Sub -->
+<h2>Sub</h2>   <!-- 1.2 Sub -->
+<h1>Head</h1> <!-- Chapter 2 - Head -->
+<h2>Sub</h2>   <!-- 2.1 Sub -->
+
+/* Nesting counters */
+ul { counter-reset: item; }
+li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
+
+<ul>
+  <li>item</li> <!-- 1 item -->
+  <li>item</li> <!-- 2 item -->
+  <ul>
+    <li>item</li> <!-- 2.1 item -->
+    <li>item</li> <!-- 2.2 item -->
+  </ul>
+</ul>
+
+*** Chapter 24: Table ***
+
+/* border-spacing */
+border-spacing : inherit | <length> [<length>]
+
+.spacing {
+  border-spacing: 5px 10px;
+}
+
+<table class="spacing">
+  <caption>My Table</caption>
+  <tr>
+    <td>1st cell, 1st row</td>
+    <td>2nd cell, 1st row</td>
+  </tr>
+  <tr>
+    <td>1st cell, 2nd row</td>
+    <td>2nd cell, 2nd row</td>
+  </tr>
+</table>
+
+/* border-collapse */
+border-collapse : inherit | separate | collapse
+table { border-collapse: collapse; }
+
+/* caption-side */
+caption-side : inherit | top | bottom
+caption { caption-side: bottom; }
+
+/* empty-cells */
+empty-cells : inherit | show | hide
+
+/* table-layout */
+table-layout : auto | fixed
+
+/* Enforce table width */
+.fixed { table-layout: fixed; }
+
+*** Chapter 25: Media ***
+
+@media screen {
+  /* screen devices only */
+}
+
+/* Media types */
+all | aural | braille | handheld | print | projection | screen | tty | tv | embossed
+
+/* Print only */
+@media print {
+  #navigation { display: none; }    /* hide navigation */
+  h1 { page-break-before: always; } /* start h1 elements on a new page */
+}
+
+<link rel="stylesheet" media="print" href="myprint.css">
+
+/* Media queries */
+width | height | device-width | device-height | aspect-ratio | device-aspect-ratio | resolution | orientation | color | color-index | monochrome
+
+/* Logical operators */
+@media (min-width: 700px), (orientation: landscape) {}
+@media not screen and (device-width: 800px) {}
+@media only screen and (min-width: 600px) {} /* not applied in older browsers */
+@media screen and (min-width : 600px) {} /* not applied in IE 6-8 */
+
+/* Responsive design guidelines */
+@media (min-width: 800px) {
+  body { background: red; }
+}
+@media (min-width: 401px) and (max-width: 799px) {
+  body { background: green; }
+}
+@media (max-width: 400px) {
+  body { background: blue; }
+}
+
+*** Chapter 26: Best practices ***
+
+/* Reusable code */
+.module {
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.widget {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.box-border {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.module { width: 200px; }
+.widget { width: 300px; }
+
+/* Global modifiers */
+.left { float: left; }
+.right { float: right; }
+
+<div class="left">...</div>
+
+/* Style sheet structure */
+
+/*
+* Title: My Theme
+* Version: 1.2.3
+* Author: My Name
+*/
+
+/* === Normalization === */
+/* === Primary layout === */
+/* === Secondary layout === */
+/* === Tertiary layout === */
+/* === Navigation === */
+/* === Text-related === */
+/* === Links and images === */
+/* === General styles === */
+/* === General classes === */
+/* === Miscellaneous === */
+
+/* Table of Contents
+-----------------
+Normalization
+Primary layout (body, primary divs)
+Secondary layout (header, footer, sidebar)
+Tertiary layout (page regions)
+Navigation (menus)
+Text-related (paragraphs, headings, lists)
+Links and images
+General styles (forms, tables, etc.)
+General classes (.clear, .center, etc.)
+Miscellaneous
+*/
+
+.myclass {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  /* Box model */
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+
+  /* Color */
+  background: #ccc;
+  color: #fff;
+
+  /* Text */
+  font-size: 1em;
+  line-height: 1.2;
+  text-align: right;
+
+  /* Other */
+  cursor: pointer;
+}
+
+/* Naming conventions */
+#main-content {
+  width: 500px;
+  margin: 0 auto; /* centered */
+}
+
+.small-top-margin { margin-top: 1em; }
+
+.post {
+  margin: 1em 0;
+}
+  .post-title {
+    font-size: 1.2em;
+  }
